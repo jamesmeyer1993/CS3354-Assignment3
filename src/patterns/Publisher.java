@@ -5,23 +5,16 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class Publisher implements SubscriberADT{
+public class Publisher implements PublisherADT{
 
-	ArrayList<Subscriber> subscribers;
-	Stack<String> op;
+	ArrayList<SubscriberADT> subscribers;
+	//Stack<String> op;
 	
-	public Publisher(Stack<String> o){
-		subscribers = new ArrayList<Subscriber>();
-		op = o;
+	public Publisher(){
+		subscribers = new ArrayList<SubscriberADT>();
 	}
 
-	public void subscribe(Subscriber s){ subscribers.add(s); }
-	
-	@Override
-	public void actionPerformed(ActionEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void subscribe(SubscriberADT s){ subscribers.add(s); }
 
 	public void notify(String message) {
 		for(SubscriberADT s : subscribers)
@@ -29,32 +22,17 @@ public class Publisher implements SubscriberADT{
 	}
 
 	@Override
-	public void subscribe(ActionEvent event) {
-		// TODO Auto-generated method stub
+	public void receive(String to, String from, String message) {
+		
+		char l[] = new char[4];
+		for(int i = 0; i < 4; i++)
+			l[i] = to.charAt(i);
+		
+		/* Two Notification Cases */
+		if( ( l[1] == 'l' )&&( l[2] == 'l' ) )
+			notify(from+" : "+message);
+		else if(subscribers.contains(to) && subscribers.contains(from))
+			subscribers.get(subscribers.indexOf(to)).notify(message);
 		
 	}	
-	
-	/*@Override
-	public void run() {
-		boolean isRunning = true;
-		do{
-			if(!op.isEmpty()){
-				if(op.pop().equals("OP_SENDTOALL")){
-					curSender = op.pop();
-					curMessage = op.pop();
-				}
-				else {
-					System.err.print("Chatty : Unkown operation code. Exiting.\n");
-					System.exit(-1);
-				}
-			}
-			
-			try {
-				wait(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			
-		}while(isRunning);
-	}*/
 }

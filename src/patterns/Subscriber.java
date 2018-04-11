@@ -13,18 +13,17 @@ public class Subscriber implements SubscriberADT, ActionListener {
 
 	private User usr;
 	private Publisher pub;
-	private Stack<String> op;
+	//private Stack<String> op;
 	
 	private JFrame frm;
 	private JPanel pnl;
 	private JTextArea txtRecieve, txtSend;
 	private JButton btnSend;
 	
-	public Subscriber(User u, Publisher p, Stack<String> o){
+	public Subscriber(User u, Publisher p){
 		
 		usr = u;
 		pub = p;
-		op = o;
 		
 		this.subscribe(new ActionEvent(new Object(), 0, ""));
 		
