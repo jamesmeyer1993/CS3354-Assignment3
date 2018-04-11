@@ -5,10 +5,15 @@
 
 ### SubscriberADT
 Methods:
- - notify( String message )	**--->**	Used by the publisher to set the text 
- - subscribe( Subscriber s )	**--->**	Used by self to receive message
+ - notify( String message )
 
-## PublisherADT
+> Used by the publisher to set the text 
+
+ - subscribe( Subscriber s )
+
+> Used by self to receive message
+
+### PublisherADT
 
 The publisher functions almost exactly like the standard pub-sub model, only with an additional method.
 
